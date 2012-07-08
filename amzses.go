@@ -30,6 +30,12 @@ type SES struct {
 	accessKey, secretKey string
 }
 
+// for your convenience, a struct you can use with encoding/xml on the server's response
+type AmazonResponse struct {
+	MessageId string `xml:"SendEmailResult>MessageId"`
+	RequestId string `xml:"ResponseMetadata>RequestId"`
+}
+
 func Init() *SES {
 	config := jconfig.LoadConfig("/etc/aws.conf")
 	return &SES{config.GetString("aws_access_key"), config.GetString("aws_secret_key")}
