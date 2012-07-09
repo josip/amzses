@@ -74,12 +74,7 @@ func (ses *SES) sesGet(data url.Values) (string, error) {
 	// date format: "Tue, 25 May 2010 21:20:27 +0000"
 	date := now.Format("Mon, 02 Jan 2006 15:04:05 -0700")
 	headers["Date"] = []string{date}
-
-	h := hmac.New(sha256.New, []uint8(ses.secretKey))
-	h.Write([]uint8(date))
-	signature := base64.StdEncoding.EncodeToString(h.Sum(nil))
-	auth := fmt.Sprintf("AWS3-HTTPS AWSAccessKeyId=%s, Algorithm=HmacSHA256, Signature=%s", ses.accessKey, signature)
-	headers["X-Amzn-Authorization"] = []string{auth}
+	headers["X-Amzn-Authorization"] = ses.authorizationHeader(date)
 
 	req := http.Request{
 		URL:        endpointURL,
