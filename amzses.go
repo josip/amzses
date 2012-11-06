@@ -46,7 +46,7 @@ func InitAuth(accessKey, secretKey string) *SES {
 }
 
 func (ses *SES) sendMail(from, to, subject, body, format string) (string, error) {
-  data := make(url.Values)
+  	data := make(url.Values)
 	data.Add("Action", "SendEmail")
 	data.Add("Source", from)
 	data.Add("Destination.ToAddresses.member.1", to)
@@ -62,7 +62,7 @@ func (ses *SES) SendMail(from, to, subject, body string) (string, error) {
 }
 
 func (ses *SES) SendHTMLMail(from, to, subject, body string) (string, error) {
-  return ses.sendMail(from, to, subject, bodu, "Html")
+	return ses.sendMail(from, to, subject, body, "Html")
 }
 
 func (ses *SES) authorizationHeader(date string) []string {
