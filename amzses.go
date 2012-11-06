@@ -62,7 +62,7 @@ func (ses *SES) SendMail(from, to, subject, body string) (string, error) {
 }
 
 func (ses *SES) SendHTMLMail(from, to, subject, body string) (string, error) {
-  return ses.sendMail(from, to, subject, "Html")
+  return ses.sendMail(from, to, subject, bodu, "Html")
 }
 
 func (ses *SES) authorizationHeader(date string) []string {
